@@ -3,6 +3,7 @@ package controller
 import (
 	"mtuan8820/go-todo-list/v2/pkg/models"
 	"mtuan8820/go-todo-list/v2/service"
+	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -13,6 +14,7 @@ type TaskController interface {
 	Add(ctx *gin.Context) error
 	Delete(ctx *gin.Context) error
 	Toggle(ctx *gin.Context) error
+	Show(ctx *gin.Context)
 }
 
 type controller struct {
@@ -65,4 +67,14 @@ func (c *controller) Toggle(ctx *gin.Context) error {
 		return (err)
 	}
 	return nil
+}
+
+func (c *controller) Show(ctx *gin.Context) {
+	tasks := c.service.GetAll()
+	data := gin.H{
+		"title": "Todo List",
+		"tasks": tasks,
+	}
+
+	ctx.HTML(http.StatusOK, "index.html", data)
 }

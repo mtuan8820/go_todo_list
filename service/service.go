@@ -9,19 +9,22 @@ type TaskService interface {
 	Add(models.Task) models.Task
 	GetAll() []models.Task
 	Delete(int) error
-	Edit(string, int) error
+	// Edit(string, int) error
 	Toggle(int) error
 }
 
 type taskService struct {
-	tasks []models.Task
+	tasks  []models.Task
+	nextID int
 }
 
 func New() TaskService {
-	return &taskService{}
+	return &taskService{nextID: 1}
 }
 
 func (service *taskService) Add(task models.Task) models.Task {
+	task.ID = service.nextID
+	service.nextID++
 	service.tasks = append(service.tasks, task)
 	return task
 }

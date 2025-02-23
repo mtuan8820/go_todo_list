@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Ubuntu", serif;
+
+
+}
+
+:root{
+    --text-color: #69665c;
+    --card-bg-color: #FFF9DE;
+    --bg-color: #fff;
+    --btn-color: #B2AFA1;
+}
+
+h1{
+    color: var(--text-color);
+}
+
+body{
+    padding: 30px 40px;
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "sidebar todo-list"
+    ;
+    grid-template-columns: 1fr 3fr;
+    gap: 5px
+}
+
+/* start: header css */
+header{
+    grid-area: header;
+    display:  flex;
+    justify-content: space-between;
+}
+
+#add-btn{
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+/* end: header css */
+
+/* start: sidebar css */
+#sidebar{
+    grid-area: sidebar;
+}
+/* end: sidebar css */
+
+/* start: todo-list css */
+#todo-list{
+    grid-area: todo-list;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card{
+    background-color: var(--card-bg-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    flex: 1 0 calc(50% - 5px);
+    max-width: calc(50% - 5px);
+    min-height: 200px;
+    max-height: 200px;  
+    display: flex;
+    flex-direction: column;
+}
+
+.card .card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card .card-body{
+    flex: 1;
+    overflow-y: auto;
+}
+
+.card .card-footer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.toggle-btn{
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* end: todo-list css */
