@@ -3,8 +3,8 @@ package models
 import "errors"
 
 type Task struct {
-	ID        int    `json:"id"`
-	Title     string `json:"title"`
+	ID        int    `json:"id" binding:"required"`
+	Title     string `json:"title" binding:"required"`
 	Completed bool   `json:"completed"`
 }
 
@@ -15,7 +15,7 @@ func (t *TodoList) Add(title string, id int) {
 	*t = append(*t, newTask)
 }
 
-func (t *TodoList) Remove(id int) error {
+func (t *TodoList) Delete(id int) error {
 	for index, task := range *t {
 		if task.ID == id {
 			*t = append((*t)[:index], (*t)[index+1:]...)

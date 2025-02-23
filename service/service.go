@@ -1,10 +1,16 @@
 package service
 
-import "mtuan8820/go-todo-list/v2/pkg/models"
+import (
+	"errors"
+	"mtuan8820/go-todo-list/v2/pkg/models"
+)
 
 type TaskService interface {
-	Save(models.Task) models.Task
-	FindAll() []models.Task
+	Add(models.Task) models.Task
+	GetAll() []models.Task
+	Delete(int) error
+	Edit(string, int) error
+	Toggle(int) error
 }
 
 type taskService struct {
@@ -15,11 +21,42 @@ func New() TaskService {
 	return &taskService{}
 }
 
-func (service *taskService) Save(task models.Task) models.Task {
+func (service *taskService) Add(task models.Task) models.Task {
 	service.tasks = append(service.tasks, task)
 	return task
 }
 
-func (service *taskService) FindAll() []models.Task {
+func (service *taskService) GetAll() []models.Task {
 	return service.tasks
+}
+
+func (service *taskService) Delete(id int) error {
+	for index, task := range service.tasks {
+		if task.ID == id {
+			service.tasks = append(service.tasks[:index], service.tasks[index+1:]...)
+			return nil
+		}
+	}
+	return errors.New("delete error, task with given ID not found")
+
+}
+
+func (service *taskService) Edit(title string, id int) error {
+	for index, task := range service.tasks {
+		if task.ID == id {
+			service.tasks[index].Title = title
+			return nil
+		}
+	}
+	return errors.New("edit error, task with given ID not found")
+}
+
+func (service *taskService) Toggle(id int) error {
+	for index, task := range service.tasks {
+		if task.ID == id {
+			service.tasks[index].Completed = !service.tasks[index].Completed
+			return nil
+		}
+	}
+	return errors.New("toggle error, task with given ID not found")
 }
