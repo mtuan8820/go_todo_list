@@ -3,19 +3,14 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Ubuntu", serif;
-
-
 }
 
 :root{
     --text-color: #69665c;
+    --text-color-light: #B2AFA1;
     --card-bg-color: #FFF9DE;
     --bg-color: #fff;
     --btn-color: #B2AFA1;
-}
-
-h1{
-    color: var(--text-color);
 }
 
 body{
@@ -27,6 +22,14 @@ body{
     ;
     grid-template-columns: 1fr 3fr;
     gap: 5px
+}
+
+h1{
+    color: var(--text-color);
+}
+
+button{
+    cursor: pointer;
 }
 
 /* start: header css */
@@ -87,13 +90,84 @@ header{
     justify-content: flex-end;
 }
 
+.task-done h2{
+    text-decoration: line-through;
+}
+
 .toggle-btn{
     border: none;
     background-color: transparent;
-    color: var(--text-color);
+    color: var(--text-color-light);
     padding: 5px 10px;
     border-radius: 5px;
-    cursor: pointer;
 }
 
+.toggle-btn .done{
+    color: var(--text-color);
+}
+
+
+
 /* end: todo-list css */
+
+/* begin: modal */
+.modal{
+    padding: 0.5rem;
+    background-color: white;
+    z-index: 10;
+    border-radius: 0.5rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 70%;
+    max-width: 800px;
+    padding: 30px 40px;
+    border: none;
+}
+
+dialog::backdrop {
+    background-color: var(--text-color);
+    opacity: 0.4;
+  }
+
+.modal .modal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#modal-close-btn{
+    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+#add-task-btn{
+    padding: 10px 20px;
+    border-radius: 0.5rem;
+    background-color: var(--btn-color);
+    border: none;
+    color: #fff;
+}
+
+.modal form input, .modal form label{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal form input + label{
+    margin-top: 30px;
+}
+
+.modal form input, .modal form textarea{
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #f9f9f8;
+    color: var(--text-color);
+    padding: 10px;
+    width: 100%;
+}
+/* end: modal */

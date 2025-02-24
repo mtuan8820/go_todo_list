@@ -17,9 +17,8 @@ func main() {
 	// gin.SetMode(gin.ReleaseMode)
 	server := gin.Default()
 
-	server.Static("/css", "../templates/css")
-
-	server.LoadHTMLGlob("../templates/*.html")
+	server.Static("/static", "../web/static")
+	server.LoadHTMLGlob("../web/templates/*.html")
 
 	apiRoutes := server.Group("/api")
 	{
@@ -56,7 +55,7 @@ func main() {
 
 	}
 
-	viewRoutes := server.Group("/view")
+	viewRoutes := server.Group("/")
 	{
 		viewRoutes.GET("/tasks", taskController.Show)
 	}
