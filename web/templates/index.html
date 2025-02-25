@@ -19,9 +19,9 @@
     <dialog add-modal class="modal" >
       <div class="modal-header">
         <button id="modal-close-btn" close-add-modal>Cancle</button>
-        <button id="add-task-btn">Add</button>
+        <input type="submit" id="add-task-btn" value="Add" form="add-task-form" formmethod="post" />
       </div>
-      <form>
+      <form id="add-task-form">
         <label for="title">Title</label>
         <input type="text" name="title" id="title" required placeholder="add a title ..."/>
         <label for="description">Description</label>
@@ -31,19 +31,18 @@
 
     <header>
       <h1>todo</h1>
-      <button id="add-btn" open-add-modal>+</button>
+      <button id="open-add-modal-btn" open-add-modal><i class="fa-solid fa-plus"></i></button>
     </header>
     
     <div id="sidebar"></div>
     <div id="todo-list">
     {{range .tasks}}
     <div class="card">
-        <div class="card-header task-done">
-          <h2>{{.Title}}</h2>
-          <!-- <button class="delete-btn" data-id="{{.ID}}">x</button> -->
+        <div class="card-header">
+          <h2 class="{{if .Completed}}line-through{{end}}">{{.Title}}</h2>
         </div>
         <div class="card-body">
-          <p>{{.Description}}</p> 
+          <p class="{{if .Completed}}line-through{{end}}">{{.Description}}</p> 
         </div>
         <div class="card-footer">
           <button type="button" class="toggle-btn" data-id="{{.ID}}" onclick="toggleTask({{.ID}})">

@@ -1,3 +1,10 @@
+const modal = document.querySelector("[add-modal]");
+const openModalButton = document.querySelector("[open-add-modal]");
+const closeModalButton = document.querySelector("[close-add-modal]");
+
+const submitBtn = document.querySelector("#add-task-btn")
+const addTaskForm = document.querySelector("#add-task-form")
+
 function toggleTask(id){
     axios.put(`/api/tasks/${id}`)
     .then(response => {
@@ -10,9 +17,6 @@ function toggleTask(id){
     });
 }
 
-const openModalButton = document.querySelector("[open-add-modal]");
-const closeModalButton = document.querySelector("[close-add-modal]");
-const modal = document.querySelector("[add-modal]");
 
 openModalButton.addEventListener("click", () => {
   modal.showModal()
@@ -20,4 +24,28 @@ openModalButton.addEventListener("click", () => {
 
 closeModalButton.addEventListener("click", () => {
   modal.close()
+})
+
+console.log(submitBtn)
+
+submitBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log("clicked")
+  const title = document.querySelector("#title").value;
+  const description = document.querySelector('#description').value;
+
+  axios({
+    method: "post",
+    url: "/api/tasks",
+    data:{
+      "title": title,
+      "description": description,
+    }
+  })
+  .then(response => {
+    location.reload();
+  })
+  .catch(error => {
+    console.error('There was an error adding the task!', error);
+  });
 })
