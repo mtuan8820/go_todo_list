@@ -17,6 +17,16 @@ function toggleTask(id){
     });
 }
 
+function deleteTask(id){
+    axios.delete(`/api/tasks/${id}`)
+    .then(response => {
+      console.log(response.data);   
+      location.reload();
+    })
+    .catch(error => {
+      console.error('There was an error deleting the task!', error);
+    });
+}
 
 openModalButton.addEventListener("click", () => {
   modal.showModal()
@@ -25,8 +35,6 @@ openModalButton.addEventListener("click", () => {
 closeModalButton.addEventListener("click", () => {
   modal.close()
 })
-
-console.log(submitBtn)
 
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
