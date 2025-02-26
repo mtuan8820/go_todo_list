@@ -21,7 +21,7 @@
   <body>
     <dialog add-modal class="modal">
       <div class="modal-header">
-        <button id="modal-close-btn" close-add-modal>Cancel</button>
+        <button type="button" id="modal-close-btn" close-add-modal>Cancel</button>
         <input
           type="submit"
           id="add-task-btn"
@@ -52,7 +52,7 @@
 
     <header>
       <h1>todo</h1>
-      <button id="open-add-modal-btn" open-add-modal>
+      <button type="button" id="open-add-modal-btn" open-add-modal>
         <i class="fa-solid fa-plus"></i>
       </button>
     </header>
@@ -62,7 +62,7 @@
       {{range .tasks}}
       <div class="card">
         <div class="card-header">
-          <h2 class="{{if .Completed}}line-through{{end}}">{{.Title}}</h2>
+          <h3 class="{{if .Completed}}line-through{{end}}">{{.Title}}</h2>
           <button
             popovertarget="actions-{{.ID}}"
             class="open-anchor-btn"
