@@ -6,7 +6,7 @@ const submitBtn = document.querySelector("#add-task-btn")
 const addTaskForm = document.querySelector("#add-task-form")
 
 function toggleTask(id){
-    axios.put(`/api/tasks/${id}`)
+    axios.put(`/tasks/${id}`)
     .then(response => {
       console.log(response.data);
       // Optionally, you can refresh the page or update the UI to reflect the changes
@@ -18,7 +18,7 @@ function toggleTask(id){
 }
 
 function deleteTask(id){
-    axios.delete(`/api/tasks/${id}`)
+    axios.delete(`/tasks/${id}`)
     .then(response => {
       console.log(response.data);   
       location.reload();
@@ -44,7 +44,7 @@ submitBtn.addEventListener("click", (event) => {
 
   axios({
     method: "post",
-    url: "/api/tasks",
+    url: "/tasks",
     data:{
       "title": title,
       "description": description,
