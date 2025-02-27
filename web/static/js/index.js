@@ -40,8 +40,8 @@ closeModalButton.addEventListener("click", () => {
 })
 
 submitBtn.addEventListener("click", (event) => {
-  const descriptionValue = description.value;
-  const titleValue = title.value;
+  const descriptionValue = document.querySelector("#description").value;
+  const titleValue = document.querySelector("#title").value;
 
   axios({
     method: "post",
