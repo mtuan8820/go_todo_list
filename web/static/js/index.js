@@ -5,6 +5,9 @@ const closeModalButton = document.querySelector("[close-add-modal]");
 const submitBtn = document.querySelector("#add-task-btn")
 const addTaskForm = document.querySelector("#add-task-form")
 
+const description = document.querySelector("#description")
+const title = document.querySelector("#title")
+
 function toggleTask(id){
     axios.put(`/tasks/${id}`)
     .then(response => {
@@ -37,17 +40,15 @@ closeModalButton.addEventListener("click", () => {
 })
 
 submitBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  console.log("clicked")
-  const title = document.querySelector("#title").value;
-  const description = document.querySelector('#description').value;
+  const descriptionValue = description.value;
+  const titleValue = title.value;
 
   axios({
     method: "post",
     url: "/tasks",
     data:{
-      "title": title,
-      "description": description,
+      "title": titleValue,
+      "description": descriptionValue,
     }
   })
   .then(response => {
@@ -56,4 +57,16 @@ submitBtn.addEventListener("click", (event) => {
   .catch(error => {
     console.error('There was an error adding the task!', error);
   });
+})
+
+const descriptionCharacterCount = document.querySelector("#description-character-count")
+const titleCharacterCount = document.querySelector("#title-character-count")
+
+
+title.addEventListener("keyup", () => {
+  titleCharacterCount.innerText = title.value.length;
+});
+
+description.addEventListener("keyup", () => {
+  descriptionCharacterCount.innerText = description.value.length
 })
